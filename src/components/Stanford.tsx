@@ -30,55 +30,38 @@ const buildStanfordRobot = () => {
 
 	// this is our desired object which we are trying to grasp it
 	scene.add(sphere);
-	const firstAngle = -Math.atan2(sphere.position.z, sphere.position.x);
-	const r = Math.sqrt(
-		sphere.position.x ** 2 +
-			sphere.position.z ** 2 -
-			secondGrp.position.z ** 2
-	);
-	const s = sphere.position.y - secondGrp.position.y;
-
-	var target = new THREE.Vector3();
-	secondGrp.getWorldPosition(target);
-	console.log(target);
-
-	const x = sphere.position.x - target.x;
-	const z = sphere.position.z - target.z;
-	const dis = Math.sqrt(x ** 2 + z ** 2);
-	const prismaticDis = Math.sqrt(s ** 2 + dis ** 2);
-	const secondAngle = Math.atan2(secondGrp.position.z, r);
 
 	// grp.rotation.y = firstAngle + secondAngle;
-	smoothTransition(
-		grp.rotation.y,
-		firstAngle + secondAngle,
-		grp,
-		"rotation",
-		"y"
-	);
+	// smoothTransition(
+	// 	grp.rotation.y,
+	// 	firstAngle + secondAngle,
+	// 	grp,
+	// 	"rotation",
+	// 	"y"
+	// );
 
 	// secondGrp.rotation.z = Math.atan2(s, r);
 	// setTimeout(() => {
-	smoothTransition(
-		secondGrp.rotation.z,
-		Math.atan2(s, r),
-		secondGrp,
-		"rotation",
-		"z"
-	);
+	// smoothTransition(
+	// 	secondGrp.rotation.z,
+	// 	Math.atan2(s, r),
+	// 	secondGrp,
+	// 	"rotation",
+	// 	"z"
+	// );
 	// }, 5000);
 
 	// console.log(target.distanceTo(sphere.position), prismaticDis);
 
 	// mrgCubeToWrist.position.x = prismaticJointSize(prismaticDis);
 	// setTimeout(() => {
-	smoothTransition(
-		mrgCubeToWrist.position.x,
-		prismaticJointSize(prismaticDis),
-		mrgCubeToWrist,
-		"position",
-		"x"
-	);
+	// smoothTransition(
+	// 	mrgCubeToWrist.position.x,
+	// 	prismaticJointSize(prismaticDis),
+	// 	mrgCubeToWrist,
+	// 	"position",
+	// 	"x"
+	// );
 	// }, 10000);
 
 	const canvas = document.getElementById("myCanvas")!;
@@ -99,14 +82,14 @@ const buildStanfordRobot = () => {
 	}
 };
 
-const prismaticJointSize = (r: number) => {
-	const boundary = r - 0.296;
-	if (boundary > 0.1) return 0.1;
-	if (boundary < -0.1) return -0.1;
+export const prismaticJointSize = (r: number) => {
+	const boundary = r - 0.065;
+	// if (boundary > 0.1) return 0.1;
+	// if (boundary < -0.1) return -0.1;
 	return boundary;
 };
 
-const smoothTransition = (
+export const smoothTransition = (
 	from: number,
 	to: number,
 	myVar: THREE.Group,

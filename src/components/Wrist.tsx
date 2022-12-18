@@ -14,6 +14,7 @@ const wristGeo3 = new THREE.CylinderGeometry(0.015, 0.015, 0.025, 32);
 const wrist3 = new THREE.Mesh(wristGeo3, material);
 const diskGeo1 = new THREE.BoxGeometry(0.01, 0.05, 0.05);
 const disk1 = new THREE.Mesh(diskGeo1, material);
+const axesHelper = new THREE.AxesHelper(0.5);
 
 wrist2.rotateX(Math.PI / 2);
 wrist3.translateX(0.02);
@@ -31,5 +32,6 @@ grp3.add(grp4);
 grp2.add(wrist1);
 grp2.add(grp3);
 grp2.position.set(0.23, 0, 0);
+grp2.add(axesHelper);
 
 export { grp2 as thirdGrp };

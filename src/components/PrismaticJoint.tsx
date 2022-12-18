@@ -18,6 +18,8 @@ mrgCubeToWrist.add(cube2);
 mrgCubeToWrist.position.set(-0.1, 0, 0);
 
 grp.add(cube1);
+const axesHelper = new THREE.AxesHelper(0.5);
+mrgCubeToWrist.add(axesHelper);
 grp.add(mrgCubeToWrist);
 // grp1.add(grp2);
 grp.position.set(0, 0.2, 0.1);
