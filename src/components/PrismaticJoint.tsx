@@ -13,15 +13,12 @@ const mrgCubeToWrist = new THREE.Group();
 mrgCubeToWrist.add(thirdGrp);
 mrgCubeToWrist.add(cube2);
 
-// this is prismatic joint's movement boundary along x axis
-// mrgCubeToWrist.position.set(0.1, 0, 0);
 mrgCubeToWrist.position.set(-0.1, 0, 0);
 
 grp.add(cube1);
-const axesHelper = new THREE.AxesHelper(0.5);
-mrgCubeToWrist.add(axesHelper);
+// const axesHelper = new THREE.AxesHelper(0.5);
+// mrgCubeToWrist.add(axesHelper);
 grp.add(mrgCubeToWrist);
-// grp1.add(grp2);
 grp.position.set(0, 0.2, 0.1);
 
 export { grp as secondGrp, mrgCubeToWrist };
