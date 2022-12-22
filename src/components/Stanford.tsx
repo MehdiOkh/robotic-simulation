@@ -31,39 +31,6 @@ const buildStanfordRobot = () => {
   // this is our desired object which we are trying to grasp it
   scene.add(sphere);
 
-  // grp.rotation.y = firstAngle + secondAngle;
-  // smoothTransition(
-  // 	grp.rotation.y,
-  // 	firstAngle + secondAngle,
-  // 	grp,
-  // 	"rotation",
-  // 	"y"
-  // );
-
-  // secondGrp.rotation.z = Math.atan2(s, r);
-  // setTimeout(() => {
-  // smoothTransition(
-  // 	secondGrp.rotation.z,
-  // 	Math.atan2(s, r),
-  // 	secondGrp,
-  // 	"rotation",
-  // 	"z"
-  // );
-  // }, 5000);
-
-  // console.log(target.distanceTo(sphere.position), prismaticDis);
-
-  // mrgCubeToWrist.position.x = prismaticJointSize(prismaticDis);
-  // setTimeout(() => {
-  // smoothTransition(
-  // 	mrgCubeToWrist.position.x,
-  // 	prismaticJointSize(prismaticDis),
-  // 	mrgCubeToWrist,
-  // 	"position",
-  // 	"x"
-  // );
-  // }, 10000);
-
   const canvas = document.getElementById("myCanvas")!;
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -73,9 +40,7 @@ const buildStanfordRobot = () => {
   const controls = new OrbitControls(camera, renderer.domElement);
 
   // animation
-  function animation(time: number) {
-    // mesh.rotation.x = time / 2000;
-    // mesh.rotation.y = time / 1000;
+  function animation() {
     controls.update();
 
     renderer.render(scene, camera);
@@ -100,20 +65,22 @@ export const smoothTransition = (
   to: number,
   myVar: THREE.Group,
   type: "position" | "rotation",
-  axis: "x" | "y" | "z"
+  axis: "x" | "y" | "z",
+  speed: number
 ) => {
-  const threshold = 0.001;
+  const threshold = speed;
+  console.log(threshold);
 
   if (from < to && to - from > threshold) {
     setTimeout(() => {
       myVar[type][axis] += threshold;
-      smoothTransition(myVar[type][axis], to, myVar, type, axis);
+      smoothTransition(myVar[type][axis], to, myVar, type, axis, speed);
     }, 5);
   }
   if (from > to && from - to > threshold) {
     setTimeout(() => {
       myVar[type][axis] -= threshold;
-      smoothTransition(myVar[type][axis], to, myVar, type, axis);
+      smoothTransition(myVar[type][axis], to, myVar, type, axis, speed);
     }, 5);
   }
 };

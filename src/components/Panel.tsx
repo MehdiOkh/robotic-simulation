@@ -11,6 +11,7 @@ const Panel = () => {
   const [xState, setXState] = useState<number>(50);
   const [yState, setYState] = useState<number>(50);
   const [zState, setZState] = useState<number>(50);
+  const [sState, setSState] = useState<number>(50);
 
   const [inverseData, setInverseData] = useState<{
     firstAngle: number;
@@ -27,6 +28,9 @@ const Panel = () => {
   const calculatePercentage = (val: number) => {
     return val / 0.008 + 50;
   };
+  const calculateSpeed = (val: number) => {
+    return val * 0.0001;
+  };
   const handleXChange = (e: ChangeEvent<HTMLInputElement>) => {
     let val = e.target.value as unknown as number;
     if (val > 0.4) val = 0.4;
@@ -40,6 +44,13 @@ const Panel = () => {
     if (val < -0.4) val = 0;
     e.target.value = val.toString();
     setYState(calculatePercentage(val) - 50);
+  };
+  const handleSChange = (e: ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value as unknown as number;
+    if (val > 0.001) val = 0.0001;
+    if (val < 0) val = 0;
+    e.target.value = val.toString();
+    setSState(val / 0.0001);
   };
   const handleZChange = (e: ChangeEvent<HTMLInputElement>) => {
     let val = e.target.value as unknown as number;
@@ -77,7 +88,8 @@ const Panel = () => {
       inverseData!.firstAngle + inverseData!.secondAngle,
       grp,
       "rotation",
-      "y"
+      "y",
+      calculateSpeed(sState)
     );
   };
   const secondJointMovement = () => {
@@ -86,14 +98,16 @@ const Panel = () => {
       Math.atan2(inverseData!.s, inverseData!.r),
       secondGrp,
       "rotation",
-      "z"
+      "z",
+      calculateSpeed(sState)
     );
     smoothTransition(
       mrgCubeToWrist.position.x,
       -0.1,
       mrgCubeToWrist,
       "position",
-      "x"
+      "x",
+      calculateSpeed(sState)
     );
   };
   const thirdJointMovement = () => {
@@ -110,7 +124,8 @@ const Panel = () => {
       mrgCubeToWrist.position.x + prismaticJointSize(prismaticDis),
       mrgCubeToWrist,
       "position",
-      "x"
+      "x",
+      calculateSpeed(sState)
     );
   };
 
@@ -272,6 +287,52 @@ const Panel = () => {
           size="small"
           onChange={handleZChange}
           value={calculateCoordinate(zState)}
+          inputProps={{
+            step: 0.01,
+            min: -0.4,
+            max: 0.4,
+            style: { textAlign: "center", width: 48 },
+          }}
+        />
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          margin: "24px 24px",
+        }}
+      >
+        <Typography
+          sx={{ margin: "0 6px" }}
+          color={"white"}
+          variant="subtitle2"
+          gutterBottom
+        >
+          speed
+        </Typography>
+        <Slider
+          sx={{
+            marginLeft: "6px",
+            marginRight: "12px",
+            marginTop: "2px",
+            color: "#6FB2E0",
+          }}
+          size="small"
+          defaultValue={50}
+          aria-label="Default"
+          value={sState}
+          onChange={(_, newVal) => {
+            setSState(newVal as number);
+          }}
+        />
+        <Input
+          sx={{
+            color: "white",
+            backgroundColor: "#193640",
+          }}
+          size="small"
+          onChange={handleSChange}
+          value={calculateSpeed(sState)}
           inputProps={{
             step: 0.01,
             min: -0.4,
