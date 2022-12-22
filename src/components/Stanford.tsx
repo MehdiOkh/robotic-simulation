@@ -47,12 +47,16 @@ const buildStanfordRobot = () => {
   }
 };
 
+// calculate our prismatic joint's opening length
 export const prismaticJointSize = (r: number) => {
+  // our distance to object minus our wrist length
   const boundary = r - 0.065;
+  // check if our object is out of reach or not
   if (boundary > 0.2) {
     toast.error("Object is out of reach!");
     return 0.2;
   }
+  // check if our robot collapses with object or not
   if (boundary < 0) {
     toast.error("Object is destroyed by robot!");
     return 0;
@@ -60,6 +64,7 @@ export const prismaticJointSize = (r: number) => {
   return boundary;
 };
 
+// a recursive function to implement smooth transition for our robot's movements
 export const smoothTransition = (
   from: number,
   to: number,
@@ -69,7 +74,6 @@ export const smoothTransition = (
   speed: number
 ) => {
   const threshold = speed;
-  console.log(threshold);
 
   if (from < to && to - from > threshold) {
     setTimeout(() => {

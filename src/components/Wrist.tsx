@@ -1,5 +1,6 @@
 import * as THREE from "three";
 
+// our wrist's first revolute joint
 const wristGeo1 = new THREE.CylinderGeometry(0.015, 0.015, 0.025, 32);
 const material = new THREE.MeshNormalMaterial();
 
@@ -7,11 +8,15 @@ const wrist1 = new THREE.Mesh(wristGeo1, material);
 wrist1.translateX(-0.02);
 wrist1.rotateZ(Math.PI / 2);
 
+// our wrist's second revolute joint
 const wristGeo2 = new THREE.CylinderGeometry(0.015, 0.015, 0.05, 32);
 const wrist2 = new THREE.Mesh(wristGeo2, material);
 
+// our wrist's first revolute joint
 const wristGeo3 = new THREE.CylinderGeometry(0.015, 0.015, 0.025, 32);
 const wrist3 = new THREE.Mesh(wristGeo3, material);
+
+// our wrist's gripper
 const diskGeo1 = new THREE.BoxGeometry(0.01, 0.05, 0.05);
 const disk1 = new THREE.Mesh(diskGeo1, material);
 // const axesHelper = new THREE.AxesHelper(0.5);
@@ -22,6 +27,7 @@ wrist3.translateX(0.02);
 wrist3.rotateZ(Math.PI / 2);
 disk1.translateX(0.04);
 
+// group our joints and our gripper together
 const grp4 = new THREE.Group();
 grp4.add(wrist3);
 grp4.add(disk1);

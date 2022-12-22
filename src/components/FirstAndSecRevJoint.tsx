@@ -18,6 +18,7 @@ const secondJointGeo = new THREE.CylinderGeometry(0.03, 0.03, 0.15, 32);
 const secondJoint = new THREE.Mesh(secondJointGeo, material);
 const axesHelper = new THREE.AxesHelper(0.5);
 
+// group our created joints together
 const grp = new THREE.Group();
 cube.add(axesHelper);
 
@@ -31,9 +32,9 @@ stem.translateY(0.08);
 grp.add(stem);
 
 secondJoint
-	.rotateX(Math.PI / 2)
-	.rotateY(Math.PI / 2)
-	.translateX(0.2);
+  .rotateX(Math.PI / 2)
+  .rotateY(Math.PI / 2)
+  .translateX(0.2);
 grp.add(secondJoint);
 grp.add(secondGrp);
 

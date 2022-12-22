@@ -7,6 +7,7 @@ import { secondGrp, mrgCubeToWrist } from "./PrismaticJoint";
 import { smoothTransition, prismaticJointSize } from "./Stanford";
 import { thirdGrp } from "./Wrist";
 
+// this is our panel to set coordinates of our object and our robot's speed
 const Panel = () => {
   const [xState, setXState] = useState<number>(50);
   const [yState, setYState] = useState<number>(50);

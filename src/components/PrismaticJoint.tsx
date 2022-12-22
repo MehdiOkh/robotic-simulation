@@ -8,6 +8,7 @@ const cube1 = new THREE.Mesh(cubeGeo1, material);
 const cubeGeo2 = new THREE.BoxGeometry(0.4, 0.04, 0.04);
 const cube2 = new THREE.Mesh(cubeGeo2, material);
 
+// group our created joints together
 const grp = new THREE.Group();
 const mrgCubeToWrist = new THREE.Group();
 mrgCubeToWrist.add(thirdGrp);
